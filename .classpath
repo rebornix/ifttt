@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/home/rebornix/Tomcat/mysqljdbc.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/classes12.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/commons-codec.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/commons-email-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/commons-email-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/commons-email-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/mail.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/mysql-connector-java-5.0-nightly-20071116-bin.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Workspaces/lib/mysqljdbc.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Genuitec/Common/plugins/com.genuitec.eclipse.j2eedt.core_8.0.0.me200911192043/data/libraryset/EE_5"/>
+	<classpathentry kind="lib" path="/home/rebornix/Genuitec/Common/plugins/com.genuitec.eclipse.j2eedt.core_8.0.0.me200911192043/data/libraryset/1.4/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="/home/rebornix/Genuitec/Common/plugins/com.genuitec.eclipse.j2eedt.core_8.0.0.me200911192043/data/libraryset/1.4/javax.servlet.jsp.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/classes12.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.0-nightly-20071116-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysqljdbc.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>
