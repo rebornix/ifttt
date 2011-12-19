@@ -28,6 +28,49 @@
     <servlet-name>CreateServlet</servlet-name>
     <servlet-class>servlet.CreateServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteTask</servlet-name>
+    <servlet-class>servlet.DeleteTask</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ChangeTaskStatus</servlet-name>
+    <servlet-class>servlet.ChangeTaskStatus</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>InsertMoneyServlet</servlet-name>
+    <servlet-class>servlet.InsertMoneyServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AdminLogin</servlet-name>
+    <servlet-class>adminservlet.AdminLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>LogOut</servlet-name>
+    <servlet-class>servlet.LogOut</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SendMessage</servlet-name>
+    <servlet-class>adminservlet.SendMessage</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
 
 
 
@@ -47,6 +90,30 @@
   <servlet-mapping>
     <servlet-name>CreateServlet</servlet-name>
     <url-pattern>/servlet/CreateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteTask</servlet-name>
+    <url-pattern>/servlet/DeleteTask</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChangeTaskStatus</servlet-name>
+    <url-pattern>/servlet/ChangeTaskStatus</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InsertMoneyServlet</servlet-name>
+    <url-pattern>/servlet/InsertMoneyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminLogin</servlet-name>
+    <url-pattern>/servlet/AdminLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogOut</servlet-name>
+    <url-pattern>/servlet/LogOut</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendMessage</servlet-name>
+    <url-pattern>/servlet/SendMessage</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

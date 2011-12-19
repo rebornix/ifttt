@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-import Bean.Account;
+import Bean.*;
 
 import com.mysql.jdbc.*;
 
@@ -100,10 +100,8 @@ public class LoginServlet extends HttpServlet {
 					page = "/Dashboard.jsp";
 				    //response.sendRedirect("/iftttDemo/Dashboard.html");
 					
-					Account account = new Account();
-					account.setUsername(userName);
-					account.setPassword(passWord);
-					session.setAttribute("account", account);
+					TaskListBean tasklistbean = new TaskListBean();
+					session.setAttribute("tasklistbean", tasklistbean);
 					
 				}
 			}

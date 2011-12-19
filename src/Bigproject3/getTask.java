@@ -25,15 +25,15 @@ public class getTask
 	public int thisID;
 	public int thisType = 0;
 	
-	public Date date;
+	public Date date;						/////thisType = 1;
 	
-	public String EmailReceiver;
-	public String EmailReceiverPassWord;
+	public String EmailReceiver;			/////thisType = 2;
+	public String EmailReceiverPassWord;	/////thisType = 2;
 	
 
-	public String thisweiboID;
-	public String checkContend;
-	public int duration; 
+	public String thisweiboID;				/////thisType = 3;thisType = 4;
+	public String checkContend;				/////thisType = 3;
+	public int duration; 					/////thisType = 4;
 	
 	
 	////////that////////
@@ -41,11 +41,11 @@ public class getTask
 	public int thatType = 0;
 	
 	
-	public String thatweiboID;
+	public String thatweiboID;				//////////thatType = 1;
 	public String weiboPassWord;
 	public String weiboContend;
 	
-	public String EmailID;
+	public String EmailID;					//////////thatType = 2;
 	public String EmailPassWord;
 	public String EmailContend;
 	public String EmailSubject;
@@ -87,7 +87,7 @@ public class getTask
 			
 			queryString =	"select thisID,thatID "+
 							"from TASK "+
-							"where Task.taskID ="+this.taskID;
+							"where TASK.taskID ="+this.taskID;
 			
 			psmt = connection.prepareStatement(queryString);
 			
@@ -310,6 +310,86 @@ public class getTask
 		return task + thisString + thatString;
 		
 	}
-}
+	
+	
+	
+	//public Date date;						/////thisType = 1;
+	public int getHour()
+	{
+		return this.date.getHour();
+	}
+	public int getMinute()
+	{
+		return this.date.getMinute();
+	}
+	
+	//public String EmailReceiver;			/////thisType = 2;
+	//public String EmailReceiverPassWord;	/////thisType = 2;
+	public String getEmailReceiver()
+	{
+		return this.EmailReceiver;
+	}
+	public String getEmailReceiverPassWord()
+	{
+		return this.EmailReceiverPassWord;
+	}
 
+	//public String thisweiboID;				/////thisType = 3;thisType = 4;
+	//public String checkContend;				/////thisType = 3;
+	//public int duration; 					/////thisType = 4;
+	public String getThisWeiboID()
+	{
+		return this.thisweiboID;
+	}
+	public String getCheckContend()
+	{
+		return this.checkContend;
+	}
+	public int getDuration()
+	{
+		return this.duration;
+	}
+	
+	//public String thatweiboID;				//////////thatType = 1;
+	//public String weiboPassWord;
+	//public String weiboContend;
+	public String getThatWeiboID()
+	{
+		return this.thatweiboID;
+	}
+	public String getWeiboPassWord()
+	{
+		return this.weiboPassWord;
+	}
+	public String getWeiboContend()
+	{
+		return this.weiboContend;
+	}
+	
+	//public String EmailID;					//////////thatType = 2;
+	//public String EmailPassWord;
+	//public String EmailContend;
+	//public String EmailSubject;
+	//public String EmailTarget;
+	public String getEmailID()
+	{
+		return this.EmailID;
+	}
+	public String getEmailPassWord()
+	{
+		return this.EmailPassWord;
+	}
+	public String getEmailContend()
+	{
+		return this.EmailContend;
+	}
+	public String getEmailSubject()
+	{
+		return this.EmailSubject;
+	}
+	public String getEmailTarget()
+	{
+		return this.EmailTarget;
+	}
+}
 

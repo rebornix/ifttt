@@ -6,13 +6,25 @@
 <body style="margin: 0; font-family: arial,sans-serif; color: #333; height:100%">
 <%@ page session="true"%>
 <%@ page import="java.io.Serializable" %>
-<jsp:useBean id="account" scope="session" class="Bean.Account" type ="Bean.Account"/>
+<%@ page import="Bean.*" %>
+<jsp:useBean id="tasklistbean" scope="session" class="Bean.TaskListBean" type ="Bean.TaskListBean"/>
 
 	<div id="wrap_all">
 		<div>
 			<div style="position: relative; margin: 10 auto; ">
-				<div style="float: left;"><i><span class="logo_text" href="/ifttt/index.jsp"> ifttt demo </span>DashBoard</i></div>
-				
+				<div style="float: left;"><i><span class="logo_text"><a href="/ifttt/index.jsp"> ifttt demo</a> </span>DashBoard</i></div>
+				<ul style="float: right;">
+  			<li><b href="#">TASKS</b></li>
+  			<li><a href="#">RECIPIES</a></li>
+  			<li><a href="#">CHANNELS</a></li>
+ 			<li><c href="#">More</c>
+    			<ul>
+      				<li><a href="#">Activity log</a></li>
+      				<li><a href="/ifttt/UserSetting.jsp">Setting </a></li>
+      				<li><a href="/ifttt/servlet/LogOut">LogOut</a></li>
+    			</ul>
+  			</li>
+			</ul>
 				<div style="float: right; align: absmiddle; ">Hi <%= session.getAttribute("username") %></div>
 				
 				<div style="clear: both;"></div>
@@ -32,11 +44,11 @@
 					<br><hr><br>
 					<div class="medium_text bold">Tasks</div>
 					<!-- The number is dinamic, use JSP!-->
+					<jsp:setProperty name="tasklistbean" property="userName" value="<%= session.getAttribute(\"username\") %>"/>
 					<div>
-						<span class="large_text bold"><jsp:getProperty name="account" property="taskenabledamount"/> </span><span class="medium_text">enabled</span>
+						<span class="large_text bold"><jsp:getProperty name="tasklistbean" property="amount"/> </span><span class="medium_text">total</span>
 						<br>
-						<span class="large_text bold"><jsp:getProperty name="account" property="taskamount"/> </span><span class="medium_text">total</span>
-						<br>
+						
 					</div>
 					<br>
 					<div>	

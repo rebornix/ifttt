@@ -1,10 +1,6 @@
 package Bigproject3;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class getAccount 
 {
@@ -12,14 +8,28 @@ public class getAccount
 	private String PassWord;
 	private int level;
 	private int money;
+	private int taskAmount;
+	private int recordAmount;
+	private getRecordIDs recordIDs ;
 	
 	
+	public int getTaskAmount()
+	{
+		return this.taskAmount;
+	}
+	public int getRecordAmount()
+	{
+		return this.recordAmount;
+	}
 	public getAccount(String ID) throws SQLException
 	{
 		this.ID = ID;
+		recordIDs = new getRecordIDs(this.ID);
+		this.recordAmount = recordIDs.getNumOfRecords();
 		initializeDB();
 		
 	}
+	
 	public String getID()
 	{
 		return ID;
@@ -55,7 +65,7 @@ public class getAccount
 			String queryString =	
 							"select accountid,password,money,level "+
 							"from ACCOUNT "+
-							"where account.accountid = '"+this.ID+"'";
+							"where accountid = '"+this.ID+"'";
 			
 			PreparedStatement psmt = connection.prepareStatement(queryString);
 			

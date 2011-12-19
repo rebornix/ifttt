@@ -15,12 +15,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 import Bean.Account;
+import Bean.TaskListBean;
 import Bigproject3.*;
-import Bigproject3.InsertTask;
 
 import com.mysql.jdbc.*;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 public class CreateServlet extends HttpServlet {
 
 	/**
@@ -86,25 +84,27 @@ public class CreateServlet extends HttpServlet {
 	    String thatType = request.getParameter("that_type");
 	    String thatValue = request.getParameter("that_value");
 	    HttpSession session = request.getSession(true);
+	    String userName = (String) session.getAttribute("username");
 	    
-	    Account accountBean = (Account)session.getAttribute("account");
-	    int taskamount = accountBean.getTaskamount();
-	    accountBean.setTaskamount(++taskamount);
-	    int taskenabledamount = accountBean.getTaskenabledamount();
-	    accountBean.setTaskenabledamount(++taskenabledamount);
+	    System.out.println(userName);
 		
 		try {
-			int id = 15;
+			int id = (new getNewTaskID()).getNew();
 			InsertTask test1 = new InsertTask(id,id,id);
+			InsertExecution insertexecution = new InsertExecution(userName, id, 100, 1);
+			
 			//this 
 			 if(thisType.equals("thisServiceClock")){
-			    	int hour = 0, minute = 0, second = 0;
+			    	int year = 0, month = 0, date = 0, hour = 0, minute = 0;
 			    	ClockMessage clockMessage = new ClockMessage(thisValue);
+			    	year = clockMessage.getYear();
+			    	month = clockMessage.getMonth();
+			    	date = clockMessage.getDate();
 			    	hour = clockMessage.getHour();
 			    	minute = clockMessage.getMinute();
-			    	second = clockMessage.getSecond(); 	
-			    	test1.setThis(2011, 12, 14, hour, minute);
-					test1.insertThis();
+			    	
+			    	test1.setThis(year, month, date, hour, minute);
+					
 			    }
 			 else if(thisType.equals("thisServiceMail")){
 			    	String account = "";
@@ -112,13 +112,30 @@ public class CreateServlet extends HttpServlet {
 			    	ThisMailMessage thisMailMessage = new ThisMailMessage(thisValue);
 			    	account = thisMailMessage.getAccount();
 			    	password = thisMailMessage.getPassword();
-			    	
+			    	test1.setThis(account, password);
 			    }
-			
+			 else if(thisType.equals("thisServiceWeiboWord")){
+				   String account = "";
+				   String word = "";
+				   ThisWeiboWordMessage thisWeiboWordMessage = new ThisWeiboWordMessage(thisValue);
+				   account = thisWeiboWordMessage.getAccount();
+				   word = thisWeiboWordMessage.getWord();
+				   test1.setThis(account, word,"ll");
+			 }
+			 else if(thisType.equals("thisServiceWeiboDuration")){
+				   String account = "";
+				   int duration = 0;
+				   ThisWeiboDurationMessage thisWeiboDurationMessage = new ThisWeiboDurationMessage(thisValue);
+				   account = thisWeiboDurationMessage.getAccount();
+				   duration = thisWeiboDurationMessage.getDuration();
+				   test1.setThis(account, duration);
+			 }
+			 test1.insertThis();
 			//that
 			 if(thatType.equals("thatServiceMail")){
 					String account = "";
 			    	String password = "";
+			    	String target = "";
 			    	String subject = "";
 			    	String content = "";
 			    	ThatMailMessage thatMailMessage = new ThatMailMessage(thatValue);
@@ -126,8 +143,9 @@ public class CreateServlet extends HttpServlet {
 			    	password = thatMailMessage.getPassword();
 			    	subject = thatMailMessage.getSubject();
 			    	content = thatMailMessage.getContent();
-			    	test1.setThat("creativeshang@gmail.com", "sd1990812", "Test hei", 
-			    			"Rt", account);
+			    	target = thatMailMessage.getTarget();
+			    	test1.setThat("creativeshang@gmail.com", "sd1990812", "Test! ", 
+			    			"Rt", target);
 			    	test1.insertThat();
 				}
 				else if(thatType.equals("thatServiceWeibo")){
@@ -144,9 +162,14 @@ public class CreateServlet extends HttpServlet {
 			 
 			CreateTask thread = new CreateTask(id);
 			thread.start();
-			 
+			
+			//This way, Dashboard.jsp can not be refreshed
+			/*
 			RequestDispatcher rd = request.getRequestDispatcher("/Dashboard.jsp");
 			rd.forward(request, response);
+			*/
+			response.sendRedirect("/ifttt/Dashboard.jsp");
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -172,9 +195,12 @@ public class CreateServlet extends HttpServlet {
 
 class ClockMessage{
 	private String message = null;
+	private int year;
+	private int month;
+	private int date;
 	private int hour;
 	private int minute;
-	private int second;
+	
 	public ClockMessage(){}
 	public ClockMessage(String message){
 		this.message = message;
@@ -185,16 +211,35 @@ class ClockMessage{
 		String tempString;
 		int length = message.length();
 		dotPos = message.indexOf("&");
-		hour = Integer.parseInt(message.substring(0, dotPos));
+		year = Integer.parseInt(message.substring(0, dotPos));
 		
 		tempString = message.substring(dotPos+1, length);
 		length = tempString.length();
 		dotPos = tempString.indexOf("&");
-		minute = Integer.parseInt(tempString.substring(0, dotPos));
+		month = Integer.parseInt(tempString.substring(0, dotPos));
+		
+		tempString = tempString.substring(dotPos+1, length);
+		length = tempString.length();
+		dotPos = tempString.indexOf("&");
+		date = Integer.parseInt(tempString.substring(0, dotPos));
+		
+		tempString = tempString.substring(dotPos+1, length);
+		length = tempString.length();
+		dotPos = tempString.indexOf("&");
+		hour = Integer.parseInt(tempString.substring(0, dotPos));
 		
 		tempString = tempString.substring(dotPos+1, length);
 		//dotPos = tempString.indexOf("&");
-		second = Integer.parseInt(tempString);
+		minute = Integer.parseInt(tempString);
+	}
+	public int getYear(){
+		return this.year;
+	}
+	public int getMonth(){
+		return this.month;
+	}
+	public int getDate(){
+		return this.date;
 	}
 	public int getHour(){
 		return this.hour;
@@ -202,9 +247,7 @@ class ClockMessage{
 	public int getMinute(){
 		return this.minute;
 	}
-	public int getSecond() {
-		return this.second;
-	}
+	
 }
 class ThisMailMessage{
 	private String message;
@@ -232,10 +275,65 @@ class ThisMailMessage{
 		return this.password;
 	}
 }
+
+class ThisWeiboWordMessage{
+	private String message;
+	private String account;
+	private String word;
+	public ThisWeiboWordMessage(){}
+	public ThisWeiboWordMessage(String message){
+		this.message = message;
+		derive(message);
+	}
+	private void derive(String message) {
+		int dotPos;
+		String tempString;
+		int length = message.length();
+		dotPos = message.indexOf("&");
+		this.account = message.substring(0, dotPos);
+		
+		word = message.substring(dotPos+1, length);
+	}
+	public String getAccount() {
+		return this.account;
+	}
+	public String getWord() {
+		return this.word;
+	}
+	
+}
+class ThisWeiboDurationMessage{
+	private String message;
+	private String account;
+	private int duration;
+	public ThisWeiboDurationMessage(){}
+	public ThisWeiboDurationMessage(String message){
+		this.message = message;
+		derive(message);
+	}
+	private void derive(String message) {
+		int dotPos;
+		String tempString;
+		int length = message.length();
+		dotPos = message.indexOf("&");
+		this.account = message.substring(0, dotPos);
+		
+		this.duration = Integer.parseInt(message.substring(dotPos+1, length));
+	}
+	public String getAccount() {
+		return this.account;
+	}
+	public int getDuration() {
+		return this.duration;
+	}
+	
+}
+
 class ThatMailMessage{
 	private String message;
 	private String account;
 	private String password;
+	private String target;
 	private String subject;
 	private String content;
 	public ThatMailMessage(){}
@@ -258,6 +356,11 @@ class ThatMailMessage{
 		tempString = tempString.substring(dotPos+1, length);
 		length = tempString.length();
 		dotPos = tempString.indexOf("&");
+		this.target = tempString.substring(0, dotPos);
+		
+		tempString = tempString.substring(dotPos+1, length);
+		length = tempString.length();
+		dotPos = tempString.indexOf("&");
 		this.subject = tempString.substring(0, dotPos);
 		
 		tempString = tempString.substring(dotPos + 1, length);
@@ -268,6 +371,9 @@ class ThatMailMessage{
 	}
 	public String getPassword() {
 		return this.password;
+	}
+	public String getTarget(){
+		return this.target;
 	}
 	public String getSubject() {
 		return this.subject;

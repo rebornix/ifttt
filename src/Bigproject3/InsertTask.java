@@ -87,8 +87,8 @@ public class InsertTask
 		try
 		{
 			queryString =	"insert "+
-							"into TASK(taskid,thisid,thatid) "+
-							"values ("+this.taskID+","+this.thisID+","+this.thatID+")";
+							"into TASK(taskid,thisid,thatid ,status) "+
+							"values ("+this.taskID+","+this.thisID+","+this.thatID+",1)";
 			
 			
 			psmt = connection.createStatement();

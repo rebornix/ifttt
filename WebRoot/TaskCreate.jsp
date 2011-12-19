@@ -2,6 +2,21 @@
 <head>
 <title>ifttt demo</title>
 <link rel="stylesheet" href="/ifttt/stylesheets/main.css" type="text/css">
+<style>
+.showbox{
+z-index:0; 
+text-align: left; padding: 20px;
+ font-size: 24px; z-index: 10;
+  position: center; 
+  width: 1000px; height: 300px; 
+  background: #fff; 
+  display: none;
+  -moz-box-shadow: 6px 2px 21px #000000;
+-moz-box-shadow: 6px 2px 21px #000000;
+-webkit-box-shadow: 6px 2px 21px #000000;
+box-shadow: 6px 2px 21px #000000;
+}
+</style>
 <script language='javascript'>
 var showbox = 0;
 function showthis(){
@@ -26,6 +41,20 @@ function showthismail(){
 	document.getElementById("thisServiceClock").style.display = "none";
 	document.getElementById("thisbox").style.display = "none";
 }
+function showthisweibo(){
+	document.getElementById("thisServiceWeibo").style.display = "block";
+	document.getElementById("thisServiceClock").style.display = "none";
+	document.getElementById("thisServiceMail").style.display = "none";
+	document.getElementById("thisbox").style.display = "none";
+}
+function showthisweiboword(){
+	document.getElementById("thisServiceWeiboWord").style.display = "block";
+	document.getElementById("thisServiceWeibo").style.display = "none";
+}
+function showthisweiboduration(){
+	document.getElementById("thisServiceWeiboDuration").style.display = "block";
+	document.getElementById("thisServiceWeibo").style.display = "none";
+}
 function showthatweibo(){
 	document.getElementById("thatServiceWeibo").style.display = "block";
 	document.getElementById("thatServiceMail").style.display = "none";
@@ -42,6 +71,8 @@ function setThis(thisAction, thisValue){
 	document.getElementById("this_value").value = thisValue;
 	document.getElementById("thisServiceClock").style.display = "none";
 	document.getElementById("thisServiceMail").style.display = "none";
+	document.getElementById("thisServiceWeiboWord").style.display = "none";
+	document.getElementById("thisServiceWeiboDuration").style.display = "none";
 }
 
 function setThat(thatAction, thatValue){
@@ -49,6 +80,8 @@ function setThat(thatAction, thatValue){
 	document.getElementById("that_value").value = thatValue;
 	document.getElementById("thatServiceWeibo").style.display = "none";
 	document.getElementById("thatServiceMail").style.display = "none";
+	document.getElementById("thisServiceWeiboWord").style.display = "none";
+	document.getElementById("thisServiceWeiboDuration").style.display = "none";
 }
 
 window.onmouseup = function(){
@@ -59,6 +92,9 @@ window.onmouseup = function(){
 		document.getElementById("thisServiceClock").style.display = "none";
 		document.getElementById("thatServiceWeibo").style.display = "none";
 		document.getElementById("thatServiceMail").style.display = "none";
+		document.getElementById("thisServiceWeibo").style.display = "none";
+		document.getElementById("thisServiceWeiboWord").style.display = "none";
+		document.getElementById("thisServiceWeiboDuration").style.display = "none";
 		showbox = 0;
 	}
 }
@@ -77,8 +113,8 @@ window.onmouseup = function(){
  			<li><c href="#">More</c>
     			<ul>
       				<li><a href="#">Activity log</a></li>
-      				<li><a href="#">Setting </a></li>
-      				<li><a href="#">Invites</a></li>
+      				<li><a href="/ifttt/UserSetting.jsp">Setting </a></li>
+      				<li><a href="/ifttt/servlet/LogOut">LogOut</a></li>
     			</ul>
   			</li>
 			</ul>
@@ -102,26 +138,30 @@ window.onmouseup = function(){
 		</form>
 	
 		<div id="thisbox" onmouseout="showbox=1;" onmouseover="showbox=0;"  
-			style="z-index:0; text-align: left; padding: 20px; font-size: 24px; z-index: 10; position: center; width: 1000px; height: 300px; background: #fff; border: #0056F9 2px solid; display: none;">
+			class="showbox">
 				<div id="thisServiceClockImg" style="float:left"><img style="margin:4px" onclick="showthisclock()" src="/ifttt/img/datetime.png"/></div>
 				<div id="thisServiceMailImg" style="float:left"><img style="margin:4px" onclick="showthismail()" src="/ifttt/img/email.png"/></div>				
+				<div id="thisServiceWeiboImg" style="float:left"><img style="margin:4px" onclick="showthisweibo()" src="/ifttt/img/weibo.png"/></div>	
 		</div>
 		<div id="thisServiceClock" onmouseout="showbox=1;" onmouseover="showbox=0;" 
-					style="z-index:1; text-align: left; padding: 20px; font-size: 24px;  
-						position: center; width: 1000px; height: 300px; background: #fff; border: #0056F9 2px solid; display: none;">
+					class="showbox">
 					<div>Clock: do this when it's <br>
+					Year: <input type="text" id="clock_year_value" />. <br>
+					Month: <input type="text" id="clock_month_value" />. <br>
+					Date: <input type="text" id="clock_date_value" />. <br>
 					Hour: <input type="text" id="clock_hour_value" />. <br>
 					Minute: <input type="text" id="clock_minute_value" />. <br>
-					Second: <input type="text" id="clock_second_value" />. <br>
 					<input type="button" value="Comfirm" onclick="setThis('thisServiceClock',
-						document.getElementById('clock_hour_value').value +'&'
-						+document.getElementById('clock_minute_value').value+'&'
-						+document.getElementById('clock_second_value').value);" 
-						style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/></div>
+						document.getElementById('clock_year_value').value +'&'
+						+document.getElementById('clock_month_value').value+'&'
+						+document.getElementById('clock_date_value').value+'&'
+						+document.getElementById('clock_hour_value').value+'&'
+						+document.getElementById('clock_minute_value').value);" 
+						style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/>
+						</div>
 		</div>
 		<div id="thisServiceMail" onmouseout="showbox=1;" onmouseover="showbox=0;" 
-					style="text-align: left; padding: 20px; font-size: 24px; z-index: 2; 
-						position: center; width: 1000px; height: 300px; background: #fff; border: #0056F9 2px solid; display: none;">
+					class="showbox">
 					<div>When Mail:<br>
 					Account: <input type="text" id="this_mail_account" /><br>
 					Password: <input type="password" id="this_mail_password" /><br>
@@ -131,20 +171,45 @@ window.onmouseup = function(){
 						+document.getElementById('this_mail_password').value);" 
 						style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/></div>
 		</div>
+		<div id="thisServiceWeibo" onmouseout="showbox=1;" onmouseover="showbox=0;" 
+			class="showbox">
+			<div id="thisServiceWeiboWordImg" style="float:left"><img style="margin:4px" onclick="showthisweiboword()" src="/ifttt/img/weibo.png"/></div>
+			<div id="thisServiceMailDurationImg" style="float:left"><img style="margin:4px" onclick="showthisweiboduration()" src="/ifttt/img/weibo.png"/></div>	
+		</div>
 		
-
+		<div id="thisServiceWeiboWord" onmouseout="showbox=1;" onmouseover="showbox=0;" 
+			class="showbox">
+			<div>Weibo: <br>
+			Account: <input type="text" id="this_weibo_word_account" value="uittgbaby@gmail.com"/><br>
+			Listen Word: <input type="text" id="this_weibo_word" value="ServerTest"/>. 
+			<input type="button" value="OK" onclick="setThis('thisServiceWeiboWord',
+			document.getElementById('this_weibo_word_account').value +'&' 
+						+document.getElementById('this_weibo_word').value);" 
+						style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/></div>
+		</div>
 		
-		<div id="thatbox" onmouseout="showbox=1;" onmouseover="showbox=0;" style="text-align: left; padding: 20px; font-size: 24px; z-index: 10; position: center; width: 1000px; height: 300px; background: #fff; border: #0056F9 2px solid; display: none;">
+		<div id="thisServiceWeiboDuration" onmouseout="showbox=1;" onmouseover="showbox=0;" 
+			class="showbox">
+			<div>Weibo: <br>
+			Account: <input type="text" id="this_weibo_duration_account" value="uittgbaby@gmail.com"/><br>
+			Duration: <input type="text" id="this_weibo_duration" value="ServerTest"/>. 
+			<input type="button" value="OK" onclick="setThis('thisServiceWeiboDuration',
+			document.getElementById('this_weibo_duration_account').value +'&'
+						+document.getElementById('this_weibo_duration').value);" 
+						style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/></div>
+		</div>
+		
+		
+		<div id="thatbox" onmouseout="showbox=1;" onmouseover="showbox=0;" class="showbox">
 				<div id="thatServiceWeiboImg" style="float:left"><img style="margin:4px" onclick="showthatweibo()" src="/ifttt/img/weibo.png"/></div>
 				<div id="thatServiceMailImg" style="float:left"><img style="margin:4px" onclick="showthatmail()" src="/ifttt/img/email.png"/></div>		
 		</div>
 		<div id="thatServiceWeibo" onmouseout="showbox=1;" onmouseover="showbox=0;" 
-			style="text-align: left; padding: 20px; font-size: 24px; z-index: 10; 
-				position: center; width: 1000px; height: 300px; background: #fff; border: #0056F9 2px solid; display: none;">
+			class="showbox">
 			<div>Weibo: <br>
-			Account: <input type="text" id="that_weibo_account" /><br>
+			Account: <input type="text" id="that_weibo_account" value="uittgbaby@gmail.com"/><br>
 			Password: <input type="password" id="that_weibo_password" /><br>
-			Send message: <input type="text" id="that_weibo_content" />. 
+			Send message: <input type="text" id="that_weibo_content" value="ServerTest"/>. 
 			<input type="button" value="OK" onclick="setThat('thatServiceWeibo',
 			document.getElementById('that_weibo_account').value +'&'
 						+document.getElementById('that_weibo_password').value+'&'
@@ -152,17 +217,17 @@ window.onmouseup = function(){
 						style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/></div>
 		</div>
 		<div id="thatServiceMail" onmouseout="showbox=1;" onmouseover="showbox=0;" 
-			style="text-align: left; padding: 20px; font-size: 24px; z-index: 10; 
-				position: center; width: 1000px; height: 300px; background: #fff; border: #0056F9 2px solid; display: none;">
+			class="showbox">
 			<div>Mail: <br>
-			Account: <input type="text" id="that_mail_account" /><br>
+			Account: <input type="text" id="that_mail_account" value="@gmail.com"/><br>
 			Password: <input type="password" id="that_mail_password" /><br>
-			Will recieve a new mail<br>
+			<input type="text" id="that_mail_target" value="@"/>Will recieve a new mail<br>
 			Subject:<input type="text" id="that_mail_subject" />.<br>
 			Content:<input type="text" id="that_mail_content" />.<br>
 			<input type="button" value="OK" onclick="setThat('thatServiceMail',
 				document.getElementById('that_mail_account').value+'&'
 				+document.getElementById('that_mail_password').value+'&'
+				+document.getElementById('that_mail_target').value+'&'
 				+document.getElementById('that_mail_subject').value+'&'
 				+document.getElementById('that_mail_content').value);" 
 				style="border: none; margin: 10px; background: #0056F9; color: #fff; font-size: 24px; width: 150px; height: 60px;"/></div>

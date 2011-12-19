@@ -21,7 +21,7 @@ public class getTaskIDs
 	public ResultSet rset;
 	public Connection connection ;
 	
-	//@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	public static void main(String []args)
 	{
 		getTaskIDs test1 = new getTaskIDs("greatshang");
@@ -44,7 +44,7 @@ public class getTaskIDs
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver loaded");
 			
-			connection  = DriverManager.getConnection("jdbc:mysql://localhost/iftt","root","092305");
+			connection  = DriverManager.getConnection("jdbc:mysql://localhost/ifttt","root","092305");
 			
 			System.out.println("Database connected");
 			

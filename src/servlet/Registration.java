@@ -68,7 +68,7 @@ public class Registration extends HttpServlet {
 		    finally {
 		      //out.close(); 
 		      response.setContentType("text/html; charset=gb2312");
-		      response.sendRedirect("/login.jsp");
+		      response.sendRedirect("/ifttt/login.jsp");
 		    }
 		  }
 

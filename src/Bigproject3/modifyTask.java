@@ -88,7 +88,7 @@ public class modifyTask
 		Class.forName("com.mysql.jdbc.Driver");
 		System.out.println("Driver loaded");
 		
-		connection  = DriverManager.getConnection("jdbc:mysql://localhost/project3","root","root");
+		connection  = DriverManager.getConnection("jdbc:mysql://localhost/ifttt","root","092305");
 		
 		System.out.println("Database connected");
 	}
